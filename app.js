@@ -74,20 +74,46 @@ const verify = function (e) {
   $('#content').empty();
   e.preventDefault();
   $('#content').append(`<input id="userInput" placeholder="John">`);
-  $('#content').append(`<button id="verifyButton">Verify</button>`);
-  $('#verifyButton').on('click', innerVerify);
+  $('#content').append(`<button id="queryButton">Verify</button>`);
+  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerVerify);
 }
 
-const innerVerify = function () {
-  if(employeeList.some(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase()) === true){
-    $('#content').append(`<div>Employee Found</div>`);
+const innerVerify = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  if (employeeList.some(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase()) === true) {
+    $('#innerContent').append(`<div>Employee Found</div>`);
   }
-  else{
-    $('#content').append(`<div>Employee Not Found</div>`);
+  else {
+    $('#innerContent').append(`<div>Employee Not Found</div>`);
   }
 }
 
+const lookup = function (e) {
+  $('#content').empty();
+  e.preventDefault();
+  $('#content').append(`<input id="userInput" placeholder="John">`);
+  $('#content').append(`<button id="queryButton">Lookup</button>`);
+  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerLookup);
+}
 
+const innerLookup = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  if (employeeList.some(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase()) === true) {
+    const employee = employeeList.find(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase());
+    $('#innerContent').append(`<div>${employee.name}</div>`);
+    $('#innerContent').append(`<div>#${employee.officeNum}</div>`);
+    $('#innerContent').append(`<div>${employee.phoneNum}</div>`);
+  }
+  else {
+    $('#innerContent').append(`<div>Employee Not Found</div>`);
+  }
+}
 
 $('#print').on('click', render);
 $('#verify').on('click', verify);

@@ -36,10 +36,33 @@ h1{
 }
 
 #content{
+    width: auto;
     grid-row: span 1;
     grid-column: span 1;
     font-weight: bold;
     font-size: 20px;
-    padding-left: 20px;
-    padding-top: 20px;
+    padding-top: 40px;
+}
+
+#userInput{
+    border-radius: 10px;
+    position: relative;
+    left: 50%;
+    padding-left: 10px;
+}
+
+#queryButton{
+    position: relative;
+    left: 50%;
+    margin-left: 10px;
+}
+
+#line-break{
+    position: relative;
+    left: 100px;
+}
+
+#innerContent{
+    position: relative;
+    left: 50%;
 }
