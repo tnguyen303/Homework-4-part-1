@@ -1,0 +1,45 @@
+body{
+    height: 98vh;
+    width: auto;
+    grid-template-rows: 55px 1fr;
+    grid-template-columns: 80px 1fr;
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+aside{
+    grid-row: span 2;
+    grid-column: span 1;
+    background-color: gray;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+    padding-top: 300px;
+    /* display: flex;
+    align-items: center; */
+    /* grid-template-rows: 30% repeat(7,1fr) 30%; */
+}
+
+h1{
+    text-align: right;
+    font-weight: bold;
+    font-size: 30px;
+    grid-row: span 1;
+    grid-column: span 1;
+    background-color: #4286f4;
+    color: white;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+#content{
+    grid-row: span 1;
+    grid-column: span 1;
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
