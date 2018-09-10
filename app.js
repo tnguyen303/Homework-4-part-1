@@ -115,19 +115,37 @@ const innerLookup = function (e) {
   }
 }
 
-$('#print').on('click', render);
+const contains = function (e) {
+  $('#content').empty();
+  e.preventDefault();
+  $('#content').append(`<input id="userInput" placeholder="jo">`);
+  $('#content').append(`<button id="queryButton">Lookup</button>`);
+  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerContains);
+}
+
+const innerContains = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  if (employeeList.some(e => e.name.toLowerCase().includes($('#userInput').val().toLowerCase())) === true) {
+    const employee = employeeList.find(e => e.name.toLowerCase().includes($('#userInput').val().toLowerCase()));
+    $('#innerContent').append(`<div>${employee.name}</div>`);
+    $('#innerContent').append(`<div>#${employee.officeNum}</div>`);
+    $('#innerContent').append(`<div>${employee.phoneNum}</div>`);
+  }
+  else {
+    $('#innerContent').append(`<div>Employee Not Found</div>`);
+  }
+}
+
+$('#print').on('click', print);
 $('#verify').on('click', verify);
 $('#lookup').on('click', lookup);
 $('#contains').on('click', contains);
 $('#update').on('click', update);
 $('#add').on('click', add);
 $('#delete').on('click', deleteFunc);
-
-
-
-
-
-
 
 
 //check which command user wants to run
