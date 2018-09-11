@@ -17,10 +17,7 @@ aside{
     font-weight: bold;
     color: white;
     vertical-align: middle;
-    padding-top: 300px;
-    /* display: flex;
-    align-items: center; */
-    /* grid-template-rows: 30% repeat(7,1fr) 30%; */
+    padding-top: 180px;
 }
 
 h1{
@@ -58,6 +55,7 @@ h1{
 #innerContent{
     position: relative;
     left: 50%;
+    padding-top: 15px;
 }
 #userInput{
     position: relative;
@@ -70,4 +68,18 @@ h1{
 input{
     border-radius: 10px;
     padding-left: 10px;
+}
+.command{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+a:hover {
+    color: red;
+}
+a:active {
+    color: white;
+}
+a {
+    color: white;
+    text-decoration: none;
 }

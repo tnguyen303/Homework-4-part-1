@@ -43,39 +43,22 @@ const employeeList = [
 
 const activeList = [];
 
-const render = function () {
+const print = function () {
   $('#content').empty();
-  if (activeList.length !== 0) {
-    for (i = 0; i < activeList.length; i++) {
-      //create a div with each element of array
-      $('#content').append(`<div>${activeList[i].name}</div>`);
-      $('#content').append(`<div>${activeList[i].officeNum}</div>`);
-      $('#content').append(`<div>${activeList[i].phoneNum}</div>`);
-      $('#content').append(`<div><br></div>`);
-    }
+  for (i = 0; i < employeeList.length; i++) {
+    //create a div with each element of array
+    $('#content').append(`<div>${employeeList[i].name}</div>`);
+    $('#content').append(`<div>#${employeeList[i].officeNum}</div>`);
+    $('#content').append(`<div>${employeeList[i].phoneNum}</div>`);
+    $('#content').append(`<div><br></div>`);
   }
-  else {
-    for (i = 0; i < employeeList.length; i++) {
-      //create a div with each element of array
-      $('#content').append(`<div>${employeeList[i].name}</div>`);
-      $('#content').append(`<div>#${employeeList[i].officeNum}</div>`);
-      $('#content').append(`<div>${employeeList[i].phoneNum}</div>`);
-      $('#content').append(`<div><br></div>`);
-    }
-  }
-}
-
-const print = function (e) {
-  e.preventDefault();
-  render();
 }
 
 const verify = function (e) {
   $('#content').empty();
   e.preventDefault();
   $('#content').append(`<input id="userInput" placeholder="John">`);
-  $('#content').append(`<button id="queryButton">Verify</button>`);
-  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<button id="queryButton">Verify</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerVerify);
 }
@@ -95,8 +78,7 @@ const lookup = function (e) {
   $('#content').empty();
   e.preventDefault();
   $('#content').append(`<input id="userInput" placeholder="John">`);
-  $('#content').append(`<button id="queryButton">Lookup</button>`);
-  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<button id="queryButton">Lookup</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerLookup);
 }
@@ -119,8 +101,7 @@ const contains = function (e) {
   $('#content').empty();
   e.preventDefault();
   $('#content').append(`<input id="userInput" placeholder="jo">`);
-  $('#content').append(`<button id="queryButton">Lookup</button>`);
-  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<button id="queryButton">Lookup</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerContains);
 }
@@ -145,8 +126,7 @@ const update = function (e) {
   $('#content').append(`<div class='inputField'>Name <input id="nameInput" placeholder="Jan"></div>`);
   $('#content').append(`<div class='inputField'>Number <input id="numberInput" placeholder="123"></div>`);
   $('#content').append(`<div class='inputField'>Phone <input id="phoneInput" placeholder="123-456-7890"></div>`);
-  $('#content').append(`<button id="queryButton">Update</button>`);
-  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<button id="queryButton">Update</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerUpdate);
 }
@@ -173,8 +153,7 @@ const add = function (e) {
   $('#content').append(`<div class='inputField'>Name <input id="nameInput" placeholder="David"></div>`);
   $('#content').append(`<div class='inputField'>Number <input id="numberInput" placeholder="123"></div>`);
   $('#content').append(`<div class='inputField'>Phone <input id="phoneInput" placeholder="123-456-7890"></div>`);
-  $('#content').append(`<button id="queryButton">Update</button>`);
-  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<button id="queryButton">Update</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerAdd);
 }
@@ -182,15 +161,38 @@ const add = function (e) {
 const innerAdd = function (e) {
   $('#innerContent').empty();
   e.preventDefault();
-  const employee = {
+  let employee = {};
+  employee = {
     name: $('#nameInput').val(),
     officeNum: $('#numberInput').val(),
     phoneNum: $('#phoneInput').val()
   };
   employeeList.push(employee);
-  $('#innerContent').append(`<div>${employeeList[employeeList.length].name}</div>`);
-  $('#innerContent').append(`<div>#${employeeList[employeeList.length].officeNum}</div>`);
-  $('#innerContent').append(`<div>${employeeList[employeeList.length].phoneNum}</div>`);
+  $('#innerContent').append(`<div>${employeeList[employeeList.length - 1].name}</div>`);
+  $('#innerContent').append(`<div>#${employeeList[employeeList.length - 1].officeNum}</div>`);
+  $('#innerContent').append(`<div>${employeeList[employeeList.length - 1].phoneNum}</div>`);
+}
+
+const deleteFunc = function (e) {
+  $('#content').empty();
+  e.preventDefault();
+  $('#content').append(`<input id="userInput" placeholder="John">`);
+  $('#content').append(`<button id="queryButton">Delete</button><hr width="70%">`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerDeleteFunc);
+}
+
+const innerDeleteFunc = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  if (employeeList.some(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase()) === true) {
+    const index = employeeList.findIndex(e => e.name.toLowerCase() === $('#userInput').val().toLowerCase());
+    employeeList.splice(index, 1);
+    $('#innerContent').append(`<div>Employee Deleted</div>`);
+  }
+  else {
+    $('#innerContent').append(`<div>Employee Not Found</div>`);
+  }
 }
 
 $('#print').on('click', print);
