@@ -101,7 +101,7 @@ const contains = function (e) {
   $('#content').empty();
   e.preventDefault();
   $('#content').append(`<input id="userInput" placeholder="jo">`);
-  $('#content').append(`<button id="queryButton">Lookup</button><hr width="70%">`);
+  $('#content').append(`<button id="queryButton">Contains</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerContains);
 }
