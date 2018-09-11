@@ -139,6 +139,60 @@ const innerContains = function (e) {
   }
 }
 
+const update = function (e) {
+  $('#content').empty();
+  e.preventDefault();
+  $('#content').append(`<div class='inputField'>Name <input id="nameInput" placeholder="Jan"></div>`);
+  $('#content').append(`<div class='inputField'>Number <input id="numberInput" placeholder="123"></div>`);
+  $('#content').append(`<div class='inputField'>Phone <input id="phoneInput" placeholder="123-456-7890"></div>`);
+  $('#content').append(`<button id="queryButton">Update</button>`);
+  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerUpdate);
+}
+
+const innerUpdate = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  if (employeeList.some(e => e.name.toLowerCase() === $('#nameInput').val().toLowerCase()) === true) {
+    const index = employeeList.findIndex(e => e.name.toLowerCase() === $('#nameInput').val().toLowerCase());
+    employeeList[index].officeNum = $('#numberInput').val();
+    employeeList[index].phoneNum = $('#phoneInput').val();
+    $('#innerContent').append(`<div>${employeeList[index].name}</div>`);
+    $('#innerContent').append(`<div>#${employeeList[index].officeNum}</div>`);
+    $('#innerContent').append(`<div>${employeeList[index].phoneNum}</div>`);
+  }
+  else {
+    $('#innerContent').append(`<div>Employee Not Found</div>`);
+  }
+}
+
+const add = function (e) {
+  $('#content').empty();
+  e.preventDefault();
+  $('#content').append(`<div class='inputField'>Name <input id="nameInput" placeholder="David"></div>`);
+  $('#content').append(`<div class='inputField'>Number <input id="numberInput" placeholder="123"></div>`);
+  $('#content').append(`<div class='inputField'>Phone <input id="phoneInput" placeholder="123-456-7890"></div>`);
+  $('#content').append(`<button id="queryButton">Update</button>`);
+  $('#content').append(`<div id="line-break">----------------------------------</div>`);
+  $('#content').append(`<div id="innerContent"></div>`);
+  $('#queryButton').on('click', innerAdd);
+}
+
+const innerAdd = function (e) {
+  $('#innerContent').empty();
+  e.preventDefault();
+  const employee = {
+    name: $('#nameInput').val(),
+    officeNum: $('#numberInput').val(),
+    phoneNum: $('#phoneInput').val()
+  };
+  employeeList.push(employee);
+  $('#innerContent').append(`<div>${employeeList[employeeList.length].name}</div>`);
+  $('#innerContent').append(`<div>#${employeeList[employeeList.length].officeNum}</div>`);
+  $('#innerContent').append(`<div>${employeeList[employeeList.length].phoneNum}</div>`);
+}
+
 $('#print').on('click', print);
 $('#verify').on('click', verify);
 $('#lookup').on('click', lookup);
@@ -146,140 +200,3 @@ $('#contains').on('click', contains);
 $('#update').on('click', update);
 $('#add').on('click', add);
 $('#delete').on('click', deleteFunc);
-
-
-//check which command user wants to run
-// const command = prompt('enter a command (print, verify, lookup, contains, update, add, delete):');
-// if (command === 'print') {
-//   print()
-// }
-// else if (command === 'verify') {
-//   verify()
-// }
-// else if (command === 'lookup') {
-//   lookup()
-// }
-// else if (command === 'contains') {
-//   contains()
-// }
-// else if (command === 'update') {
-//   update()
-// }
-// else if (command === 'add') {
-//   add()
-// }
-// else if (command === 'delete') {
-//   deletefunc()
-// }
-// else {
-//   render('no such function!')
-// }
-
-
-
-
-
-
-
-// //commands live here
-// function print() {
-//   render(`Total number of employees: ${employeeList.length}`);
-//   render(`-------------------------------------------------------`);
-//   for (i = 0; i < employeeList.length; i++) {
-//     render(`name: ${employeeList[i].name}`);
-//     render(`officeNum: ${employeeList[i].officeNum}`);
-//     render(`phoneNum: ${employeeList[i].phoneNum}`);
-//     render(`-------------------------------------------------------`);
-//   }
-// }
-
-// function verify() {
-//   const nameQuery = prompt('Enter employee name:').toLowerCase();
-//   let isVerified = false;
-//   for (i = 0; i < employeeList.length; i++) {
-//     if (nameQuery === employeeList[i].name.toLowerCase()) {
-//       render('true');
-//       isVerified = true;
-//     }
-//   }
-//   if (isVerified === false) {
-//     render('No such name, check spelling!');
-//   }
-// }
-
-// function lookup() {
-//   const nameQuery = prompt('Enter employee name:').toLowerCase();
-//   let isVerified = false;
-//   for (i = 0; i < employeeList.length; i++) {
-//     if (nameQuery === employeeList[i].name.toLowerCase()) {
-//       render(`name: ${employeeList[i].name}`);
-//       render(`officeNum: ${employeeList[i].officeNum}`);
-//       render(`phoneNum: ${employeeList[i].phoneNum}`);
-//       isVerified = true;
-//     }
-//   }
-//   if (isVerified === false) {
-//     render('No such name, check spelling!');
-//   }
-// }
-
-// function contains() {
-//   const nameQuery = prompt('Enter part of employee name:').toLowerCase();
-//   for (i = 0; i < employeeList.length; i++) {
-//     if (employeeList[i].name.toLowerCase().includes(nameQuery)) {
-//       render(`name: ${employeeList[i].name}`);
-//       render(`officeNum: ${employeeList[i].officeNum}`);
-//       render(`phoneNum: ${employeeList[i].phoneNum}`);
-//       render(`-------------------------------------------------------`);
-//     }
-//   }
-// }
-
-// function update() {
-//   const nameQuery = prompt('Enter employee name:').toLowerCase();
-//   let nameVerified = false;
-//   let fieldVerified = false;
-//   for (i = 0; i < employeeList.length; i++) {
-//     if (nameQuery === employeeList[i].name.toLowerCase()) {
-//       nameVerified = true;
-//       const fieldToChange = prompt('Enter field to change:');
-//       if (employeeList[1].hasOwnProperty(fieldToChange)) {
-//         fieldVerified = true;
-//         const newValue = prompt('Enter new value:');
-//         employeeList[i][fieldToChange] = newValue;
-//         render(`name: ${employeeList[i].name}`);
-//         render(`officeNum: ${employeeList[i].officeNum}`);
-//         render(`phoneNum: ${employeeList[i].phoneNum}`);
-//       }
-//     }
-//   }
-//   if (nameVerified === false) {
-//     render('No such name, check spelling!');
-//   }
-//   if (fieldVerified === false) {
-//     render('No such field, check spelling!');
-//   }
-// }
-
-// function add() {
-//   const nameToAdd = prompt('Enter employee name:');
-//   const officeNumToAdd = prompt('Enter office number:');
-//   const phoneNumToAdd = prompt('Enter phone number:');
-//   var newEmployee = { name: nameToAdd, officeNum: officeNumToAdd, phoneNum: phoneNumToAdd };
-//   employeeList.push(newEmployee);
-//   render(`${nameToAdd} has been successfully added to employee list!`);
-//   render(`-------------------------------------------------------`);
-//   print()
-// }
-
-// function deletefunc() {
-//   const nameQuery = prompt('Enter employee name:').toLowerCase();
-//   for (i = 0; i < employeeList.length; i++) {
-//     if (nameQuery === employeeList[i].name.toLowerCase()) {
-//       employeeList.splice(i, 1);
-//     }
-//   }
-//   render(`${nameQuery} has been successfully removed from employee list!`);
-//   render(`-------------------------------------------------------`);
-//   print()
-// }
