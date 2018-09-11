@@ -153,7 +153,7 @@ const add = function (e) {
   $('#content').append(`<div class='inputField'>Name <input id="nameInput" placeholder="David"></div>`);
   $('#content').append(`<div class='inputField'>Number <input id="numberInput" placeholder="123"></div>`);
   $('#content').append(`<div class='inputField'>Phone <input id="phoneInput" placeholder="123-456-7890"></div>`);
-  $('#content').append(`<button id="queryButton">Update</button><hr width="70%">`);
+  $('#content').append(`<button id="queryButton">Add</button><hr width="70%">`);
   $('#content').append(`<div id="innerContent"></div>`);
   $('#queryButton').on('click', innerAdd);
 }
